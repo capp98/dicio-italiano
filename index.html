@@ -3,11 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dicionário Italiano</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="script.js"></script>
   </head>
 
   <body class="conteudo exercicio">
-    <form onsubmit="getWord()">
+    <span
+      >Para obter as definições, primeiro é necessário ter permissão temporária
+      para o IP do dispositivo através deste link:
+      <a href="https://cors-anywhere.herokuapp.com/"
+        >https://cors-anywhere.herokuapp.com/</a
+      ></span
+    >
+    <form onsubmit="GetWord()">
       <input id="word" type="text" />
       <input type="submit" value="Pesquisar" />
     </form>
@@ -16,7 +24,10 @@
 
     <script>
       const form = document.forms[0];
-      form.addEventListener('submit', (e) => e.preventDefault());
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        GetInputWord();
+      });
 
       var proxy = 'https://cors-anywhere.herokuapp.com/';
       var parser = new DOMParser();
@@ -38,11 +49,14 @@
         return xhr;
       }
 
-      function getWord(e) {
-        console.log('Pesquisando');
-
+      function GetInputWord() {
         let word = document.getElementById('word').value;
+        GetWord(word);
+      }
 
+      function GetWord(word) {
+        if (word === undefined) return;
+        console.log('Pesquisando');
         var request = createCORSRequest(word);
         request.send();
 
@@ -53,19 +67,32 @@
           );
 
           let definicoes = xmlDocument.querySelectorAll('.italiano');
-
           let element = document.createElement('div');
           let hd = document.createElement('h1');
           hd.innerText = word;
           element.append(hd);
           definicoes.forEach((definicao, index) => {
             let p = document.createElement('p');
-            p.innerText = index + '. ' + definicao.innerHTML;
+            p.innerText = index + '. '; // + definicao.innerText;
+
+            definicao.innerText.split(' ').forEach((palavra) => {
+              let span = document.createElement('span');
+              span.className = 'palavra';
+              span.addEventListener('click', (e) => GetSpanWord(e));
+              span.innerText = palavra + ' ';
+              p.append(span);
+            });
             element.append(p);
           });
-
-          document.getElementById('ui').prepend(element);
+          let div = document.getElementById('ui');
+          if (div.hasChildNodes()) div.removeChild(div.children[0]);
+          div.prepend(element);
         };
+      }
+
+      function GetSpanWord(e) {
+        let word = e.target.innerText.replace(',', '').replace('.', '').trim();
+        GetWord(word);
       }
     </script>
   </body>
