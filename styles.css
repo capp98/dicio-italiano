@@ -1,17 +1,88 @@
 * {
   font-family: 'Oswald', sans-serif;
+  box-sizing: border-box;
 }
 
 html {
   height: 100%;
+  background: #112;
 }
 
 body {
+  color: #eee;
   margin: 0;
   height: 100%;
 }
 
+a {
+  color: #eee;
+}
+a:hover {
+  color: #ccc;
+}
+
+form {
+  margin-top: 15px;
+  text-align: center;
+}
+
+input {
+  font-size: 1.2em;
+}
+
 span.palavra:hover {
   cursor: pointer;
-  font-weight: bold;
+}
+
+#ui > div > p {
+  background: #223;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px 10px;
+  margin: 1px 0;
+  text-align: justify;
+  line-height: 1.75em;
+}
+
+#ui > div > p::first-letter {
+  font-size: 1.25em;
+  margin-left: 1.25em;
+}
+
+#loading {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  animation: balanca infinite alternate-reverse ease-in-out 2s;
+}
+
+#loading.visible {
+  display: flex;
+}
+
+@keyframes balanca {
+  0% {
+    color: #000;
+    rotate: 10deg;
+    top: 30%;
+    background: #fff;
+  }
+  50% {
+    top: 32%;
+  }
+  100% {
+    rotate: -10deg;
+    color: #111;
+    background: #eee;
+    top: 30%;
+  }
 }
