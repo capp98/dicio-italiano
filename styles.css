@@ -12,6 +12,7 @@ body {
   color: #eee;
   margin: 0;
   height: 100%;
+  padding: 15px 30px;
 }
 
 a {
@@ -19,6 +20,14 @@ a {
 }
 a:hover {
   color: #ccc;
+}
+
+h1 {
+  text-transform: capitalize;
+}
+
+h1 + span {
+  display: block;
 }
 
 form {
@@ -39,7 +48,7 @@ span.palavra:hover {
   color: #fff;
   border-radius: 5px;
   padding: 15px 10px;
-  margin: 1px 0;
+  margin: 15px 0;
   text-align: justify;
   line-height: 1.75em;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <title>Dicionário Italiano</title>
@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
   </head>
 
   <body class="conteudo exercicio">
@@ -25,81 +24,6 @@
 
     <div id="ui"></div>
     <div id="loading"><span>Loading...</span></div>
-
-    <script>
-      const form = document.forms[0];
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        GetInputWord();
-      });
-
-      var proxy = 'https://cors-anywhere.herokuapp.com/';
-      var parser = new DOMParser();
-
-      function createCORSRequest(word) {
-        var xhr = new XMLHttpRequest();
-        var url =
-          proxy +
-          `https://www.dizionario-italiano.it/dizionario-italiano.php?parola=${word}`;
-
-        if ('withCredentials' in xhr) {
-          xhr.open('get', url, true);
-        } else if (typeof XDomainRequest != 'undefined') {
-          xhr = new XDomainRequest();
-          xhr.open(method, url);
-        } else {
-          xhr = null;
-        }
-        return xhr;
-      }
-
-      function GetInputWord() {
-        let word = document.getElementById('word').value;
-        GetWord(word);
-      }
-
-      function GetWord(word) {
-        if (word === undefined) return;
-        document.getElementById('loading').style.display = 'flex';
-        console.log('Pesquisando');
-        var request = createCORSRequest(word);
-        request.send();
-
-        request.onload = function () {
-          var xmlDocument = new DOMParser().parseFromString(
-            request.response,
-            'text/html'
-          );
-
-          let definicoes = xmlDocument.querySelectorAll('.italiano');
-          let element = document.createElement('div');
-          let hd = document.createElement('h1');
-          hd.innerText = word;
-          element.append(hd);
-          definicoes.forEach((definicao, index) => {
-            let p = document.createElement('p');
-            p.innerText = index + '. ';
-
-            definicao.innerText.split(' ').forEach((palavra) => {
-              let span = document.createElement('span');
-              span.className = 'palavra';
-              span.addEventListener('click', (e) => GetSpanWord(e));
-              span.innerText = palavra + ' ';
-              p.append(span);
-            });
-            element.append(p);
-          });
-          let div = document.getElementById('ui');
-          if (div.hasChildNodes()) div.removeChild(div.children[0]);
-          div.prepend(element);
-          document.getElementById('loading').style.display = 'none';
-        };
-      }
-
-      function GetSpanWord(e) {
-        let word = e.target.innerText.replace(',', '').replace('.', '').trim();
-        GetWord(word);
-      }
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
