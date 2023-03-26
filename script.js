@@ -37,14 +37,12 @@ function GetWord(word) {
   let request = createCORSRequest(word);
   request.send();
 
-  request.onload = function () {
+  request.onload = async function () {
     let xmlDocument = new DOMParser().parseFromString(
       request.response,
       'text/html'
     );
 
-    //   let definicoes = xmlDocument.querySelectorAll(".italiano");
-    //   let gramaticas = xmlDocument.querySelectorAll(".grammatica");
     let elementos = xmlDocument.querySelectorAll('.paradigma ~ span');
 
     let element = document.createElement('div');
@@ -54,8 +52,8 @@ function GetWord(word) {
     let pronounce = document.createElement('abbr');
 
     if (xmlDocument.querySelector('.lemma') != null) {
-      wordFound.innerText =
-        xmlDocument.querySelector('.lemma').childNodes[0].textContent;
+      wordFound.innerText = word;
+      wordFound.id = 'word';
       element.append(wordFound);
 
       if (xmlDocument.querySelector('small > span') != null) {
@@ -69,6 +67,19 @@ function GetWord(word) {
       ).innerText;
 
       element.append(pronounce);
+
+      let src = `https://www.infopedia.pt/defimages/italiano-portugues/desktop/${word[0]}/${word}.png`;
+
+      let link = document.createElement('a');
+      link.href = `https://www.infopedia.pt/dicionarios/italiano-portugues/${word}`;
+      let img = document.createElement('img');
+      img.src = src;
+      img.alt = wordFound.innerText;
+      img.addEventListener('error', function handleError() {
+        img.style.display = 'none';
+      });
+      link.append(img);
+      element.append(link);
 
       let index = 1;
 
