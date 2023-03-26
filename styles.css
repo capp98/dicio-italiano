@@ -10,7 +10,7 @@ html {
 
 body {
   color: #eee;
-  margin: 0;
+  margin: 15px 30px;
   height: 100%;
   padding: 15px 30px;
 }
@@ -22,17 +22,29 @@ a:hover {
   color: #ccc;
 }
 
+#cors-permission {
+  max-width: 500px;
+  text-align: justify;
+}
+
 h1 {
   text-transform: capitalize;
+}
+#word {
+  margin: 20px 0 5px;
 }
 
 h1 + span {
   display: block;
 }
 
+abbr {
+  display: block;
+}
+
 form {
   margin-top: 15px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 input {
@@ -41,6 +53,10 @@ input {
 
 span.palavra:hover {
   cursor: pointer;
+}
+
+#ui {
+  padding-bottom: 15px;
 }
 
 #ui > div > p {
@@ -94,4 +110,10 @@ span.palavra:hover {
     background: #eee;
     top: 30%;
   }
+}
+
+img {
+  margin: 20px 0;
+  max-width: 500px;
+  display: block;
 }
