@@ -10,22 +10,25 @@
   </head>
 
   <body>
-    <h1 style="text-align: center">Dicio Italiano</h1>
+    <nav>
+      <h1 style="text-align: center">Dicio Italiano</h1>
 
-    <span id="cors-permission"
-      >Para obter as definições, primeiro é necessário ter permissão temporária
-      para o IP do dispositivo através deste link:
-      <a href="https://cors-anywhere.herokuapp.com/"
-        >https://cors-anywhere.herokuapp.com/</a
-      ></span
-    >
-    <form onsubmit="GetWord()">
-      <input id="word" type="text" />
-      <input type="submit" value="Pesquisar" />
-    </form>
-
-    <div id="ui"></div>
-    <div id="loading"><span>Loading...</span></div>
+      <span id="cors-permission"
+        >Para obter as definições, primeiro é necessário ter permissão
+        temporária para o IP do dispositivo através deste link:
+        <a href="https://cors-anywhere.herokuapp.com/"
+          >https://cors-anywhere.herokuapp.com/</a
+        ></span
+      >
+      <form onsubmit="GetWord()">
+        <input id="word" type="text" />
+        <input type="submit" value="Pesquisar" />
+      </form>
+    </nav>
+    <main>
+      <div id="ui"></div>
+      <div id="loading"><span>Loading...</span></div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
